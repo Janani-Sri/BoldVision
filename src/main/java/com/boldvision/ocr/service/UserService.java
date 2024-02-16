@@ -1,9 +1,7 @@
 package com.boldvision.ocr.service;
 
 import com.boldvision.ocr.config.DataAccessConstants;
-import com.boldvision.ocr.dto.ResponseDto;
 import com.boldvision.ocr.dto.SignInDto;
-import com.boldvision.ocr.dto.SignInResponseDto;
 import com.boldvision.ocr.dto.SignupDto;
 import com.boldvision.ocr.exceptions.AuthenticationFailException;
 import com.boldvision.ocr.exceptions.CustomException;
@@ -41,8 +39,7 @@ public class UserService {
         try {
             encrypted_password = encryptPassword(password);
         } catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-            logger.error("Password encryption failed for user with email :: ", signupDto.getEmail());
+            logger.error("Password encryption failed for user with email ", signupDto.getEmail());
         }
 
         User user = new User(signupDto.getFirstName(), signupDto.getLastName(), signupDto.getEmail(), encrypted_password);
@@ -52,7 +49,6 @@ public class UserService {
             authenticationService.saveAuthenticationToken(authenticationToken);
             Map<String, Object> jsonResponse = new HashMap<>();
             jsonResponse.put("token", authenticationToken.getToken());
-//            return new ResponseDto("success", "Signed up successfully!!!");
             return ResponseEntity.ok(jsonResponse);
         } catch (Exception e){
             throw new CustomException(e.getMessage());
@@ -72,15 +68,11 @@ public class UserService {
             throw new CustomException("User not found!!");
         }
         try{
-            logger.info("user password : ", user.getPassword());
-            logger.info("signindto password: ", signInDto.getPassword());
-            logger.info("signin dto encrypted password : ", encryptPassword(signInDto.getPassword()));
             if(!user.getPassword().equals(encryptPassword(signInDto.getPassword()))){
                 throw new AuthenticationFailException(DataAccessConstants.WRONG_PASSWORD);
             }
         } catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-            logger.error("password encryption failed");
+            logger.error("password encryption failed ", e);
             throw new CustomException(e.getMessage());
         }
         AuthenticationToken authenticationToken = authenticationService.getToken(user);
@@ -90,7 +82,6 @@ public class UserService {
             throw new AuthenticationFailException(DataAccessConstants.AUTH_TOKEN_NOT_PRESENT);
         }
         jsonResponse.put("token", authenticationToken.getToken());
-//        return new SignInResponseDto("success", authenticationToken.getToken());
         return ResponseEntity.ok(jsonResponse);
     }
 }

@@ -23,7 +23,7 @@ The Optical Character Recognition (OCR) Web Application is designed to facilitat
 ## Libraries
 
 - Tesseract
-- OpenCV (incomplete code for bold content extraction)
+- OpenCV & Boofcv (Incomplete code for bold content extraction)
 
 ## Installation
 
