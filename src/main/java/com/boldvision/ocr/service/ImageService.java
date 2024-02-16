@@ -19,7 +19,6 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.lang.System.loadLibrary;
 
 @Service
 public class ImageService {
@@ -55,21 +54,17 @@ public class ImageService {
 
     public String extractBoldContent(String content){
         Pattern boldPattern = Pattern.compile("\\b[A-Z]+\\b");
-
         Matcher matcher = boldPattern.matcher(content);
         StringBuilder boldWords = new StringBuilder();
-
         while (matcher.find()){
             boldWords.append(matcher.group()).append(" ");
         }
-
         return boldWords.toString().trim();
     }
 
     public ResponseEntity<Map<String, Object>> getAllImagesByUser(String token){
         User user = authenticationService.getUser(token);
         int user_id = user.getId();
-        System.out.println("user id inside image service is :: " + user_id);
         List<ImageDetails> images = getAllImages(user_id);
         Map<String, Object> jsonResponse = new HashMap<>();
         jsonResponse.put("images", images);

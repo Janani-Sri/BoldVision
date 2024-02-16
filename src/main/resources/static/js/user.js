@@ -12,16 +12,14 @@ function validate(form)
 	{
 		if (this.readyState == 4 && this.status == 200)
 		{
-//			alert(this.responseText);
 			var response = JSON.parse(this.responseText);
 			console.log(response)
 			console.log(response.token);
             storeToken(response.token);
-
 			window.location = "/uploadImage";
 		}
 	};
-	xhttp.open("POST", "http://localhost:8080/user/signin",true);
+	xhttp.open("POST", "/user/signin",true);
 	xhttp.setRequestHeader('Content-Type', 'application/json');
 	xhttp.send(json);
 }
@@ -45,25 +43,19 @@ function signUp(form)
 		    storeToken(response.token);
 		    console.log(response);
 		    window.location = "/uploadImage";
-//			alert(this.responseText);
-//			window.location = "/";
 		}
 	};
-	xhttp.open("POST", "http://localhost:8080/user/signup",true);
+	xhttp.open("POST", "/user/signup",true);
 	xhttp.setRequestHeader('Content-Type', 'application/json');
 	xhttp.send(json);
 }
 
 function storeToken(token){
-//    localStorage.setItem('accessToken', token);
-console.log(token)
     document.cookie = "accessToken=" + token + "; path=/; secure; samesite=strict";
-
 }
 
 function getStoredToken() {
-//    return localStorage.getItem('accessToken');
-var name = "accessToken=";
+    var name = "accessToken=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var cookieArray = decodedCookie.split(';');
 
@@ -73,6 +65,5 @@ var name = "accessToken=";
             return cookie.substring(name.length, cookie.length);
         }
     }
-
     return null;
 }
