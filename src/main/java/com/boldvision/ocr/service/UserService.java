@@ -51,7 +51,7 @@ public class UserService {
             final AuthenticationToken authenticationToken = new AuthenticationToken(user);
             authenticationService.saveAuthenticationToken(authenticationToken);
             Map<String, Object> jsonResponse = new HashMap<>();
-            jsonResponse.put("token", authenticationToken);
+            jsonResponse.put("token", authenticationToken.getToken());
 //            return new ResponseDto("success", "Signed up successfully!!!");
             return ResponseEntity.ok(jsonResponse);
         } catch (Exception e){
@@ -85,10 +85,11 @@ public class UserService {
         }
         AuthenticationToken authenticationToken = authenticationService.getToken(user);
         Map<String, Object> jsonResponse = new HashMap<>();
-        jsonResponse.put("token", authenticationToken);
+
         if(!Objects.nonNull(authenticationToken)){
             throw new AuthenticationFailException(DataAccessConstants.AUTH_TOKEN_NOT_PRESENT);
         }
+        jsonResponse.put("token", authenticationToken.getToken());
 //        return new SignInResponseDto("success", authenticationToken.getToken());
         return ResponseEntity.ok(jsonResponse);
     }

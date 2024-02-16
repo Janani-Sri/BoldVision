@@ -22,12 +22,12 @@ public class AuthenticationService {
     }
     //get token from user
     public AuthenticationToken getToken(User user){
-        return repo.findTokenByUser(user);
+        return repo.findByUser(user);
     }
 
     //get user from token
     public User getUser(String token){
-        AuthenticationToken auth_token = repo.findTokenByToken(token);
+        AuthenticationToken auth_token = repo.findByToken(token);
         if(Objects.nonNull(auth_token)){
             if(Objects.nonNull(auth_token.getUser())){
                 return auth_token.getUser();

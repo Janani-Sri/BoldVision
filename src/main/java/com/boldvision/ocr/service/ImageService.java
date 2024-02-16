@@ -1,16 +1,20 @@
 package com.boldvision.ocr.service;
 
 import com.boldvision.ocr.model.ImageDetails;
+import com.boldvision.ocr.model.User;
 import com.boldvision.ocr.repository.ImageRepository;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,13 +25,15 @@ import static java.lang.System.loadLibrary;
 public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    public void saveImage(ImageDetails imageDetails){
-        imageRepository.save(imageDetails);
+    public ImageDetails saveImage(ImageDetails imageDetails){
+        return imageRepository.save(imageDetails);
     }
 
     public List<ImageDetails> getAllImages(int user_id){
-        return imageRepository.findAllImagesByUserId(user_id);
+        return imageRepository.findByUserId(user_id);
     }
 
     public Optional<ImageDetails> getImageById(int id){
@@ -58,5 +64,15 @@ public class ImageService {
         }
 
         return boldWords.toString().trim();
+    }
+
+    public ResponseEntity<Map<String, Object>> getAllImagesByUser(String token){
+        User user = authenticationService.getUser(token);
+        int user_id = user.getId();
+        System.out.println("user id inside image service is :: " + user_id);
+        List<ImageDetails> images = getAllImages(user_id);
+        Map<String, Object> jsonResponse = new HashMap<>();
+        jsonResponse.put("images", images);
+        return ResponseEntity.ok(jsonResponse);
     }
 }

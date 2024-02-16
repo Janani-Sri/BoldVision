@@ -36,7 +36,7 @@ public class BoldVisionApplication {
 		System.setProperty("jna.library.path", "/opt/local/lib");
 
 		SpringApplication.run(BoldVisionApplication.class, args);
-
+/*
 		BufferedImage bufferedImage = ImageIO.read(new File("/Users/janani-11495/Janu/per/SDE/Vitraya/Ass_1/BoldVision/src/main/resources/static/images/sampleOCRImage.png"));
 		GrayU8 inputImage = ConvertBufferedImage.convertFrom(bufferedImage, (GrayU8) null);
 
@@ -55,6 +55,8 @@ public class BoldVisionApplication {
 		ImageIO.write(outputBufferedImage, "png", new File("/Users/janani-11495/Janu/per/SDE/Vitraya/Ass_1/BoldVision/src/main/resources/static/images/image_filtered.png"));
 
 		System.out.println("Bold text extracted!");
+		*/
+
 	}
 
 }

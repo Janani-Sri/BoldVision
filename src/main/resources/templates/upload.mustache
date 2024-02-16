@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Upload and Display</title>
+    <title>Bold Vision</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script type="text/javascript" src="/js/user.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.2/mustache.js"></script>
+
 </head>
 <body>
+<button class="processed-button" onclick="displayAllImageDetails()">Processed Images</button>
+<div class="container" id="upload-container">
+    <div class="login-container">
+        <h2>Content Extractor</h2>
+        <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="image">Select Image:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+            <button type="button" onclick="uploadImage()">Upload</button>
+        </form>
+    </div>
 
-<h2>Upload Image</h2>
-
-<form id="uploadForm" enctype="multipart/form-data">
-    <label for="image">Select Image:</label>
-    <input type="file" id="image" name="image" accept="image/*">
-    <br>
-    <button type="button" onclick="uploadImage()">Upload</button>
-</form>
-
-<h2>Display Images</h2>
-
-<div id="imageContainer" style="display:none">
-    <img id="image" src="">
-    <p id="content"></p>
-    <p id="boldContent"></p>
+    <div class="image-container" id="imageContainer" style="display: none;">
+        <img id="imageDisplay" alt="Uploaded Image">
+        <div class="main-title">Content Extracted From Image:</div>
+        <div><p id="content"></p></div>
+        <p id="boldContent" style="display:none"></p>
+    </div>
 </div>
 
+<div id="processed-image-container"></div>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="/js/image.js"></script>
-
 </body>
 </html>

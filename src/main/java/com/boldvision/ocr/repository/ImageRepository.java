@@ -13,5 +13,5 @@ public interface ImageRepository extends JpaRepository<ImageDetails, Integer> {
 
     Optional<ImageDetails> findById(int id);
 
-    List<ImageDetails> findAllImagesByUserId(int userId);
+    List<ImageDetails> findByUserId(int userId);
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processed Images</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.2/mustache.js"></script>
+
+</head>
+<body>
+<div class="container">
+    {{#images}}
+        <div class="image-list">
+            <img src="data:image/jpeg;base64,{{imageFile}}" alt="Processed Image">
+            <div class="main-title">Content Extracted From Image:</div>
+            <div><p>{{content}}</p></div>
+        </div>
+    {{/images}}
+</div>
+
+<script src="/js/image.js"></script>
+<script src="/js/processed-images.js"></script>
+</body>
+</html>
