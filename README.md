@@ -17,6 +17,7 @@ The Optical Character Recognition (OCR) Web Application is designed to facilitat
 - Mustache JS
 - Maven
 - AJAX
+- MySQL
 - CSS
 - Html
 
