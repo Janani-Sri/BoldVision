@@ -1,0 +1,32 @@
+<! DOCTYPE HTML>
+<html>
+<head>
+    <title>Bold Vision</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/user.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+<div class="container-fluid">
+    <form onSubmit="signUp(this); return false;">
+        <fieldset class="form-group">
+            <label>First Name<input class="form-control" type="text" id="firstName" name="firstName" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" title="Must contain only alphabets with space" required/></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>Last Name<input class="form-control" type="text" id="lastName" name="lastName" pattern="^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" title="Must contain only alphabets with space" required/></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>E-Mail<input class="form-control" type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="xxx@yyy.zzz" required /></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>Password<input class="form-control" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </fieldset>
+        <button type="submit" class="btn btn-success">SignUp</button>
+    </form>
+
+</div>
+
+
+
+</body>
+
+</html>
